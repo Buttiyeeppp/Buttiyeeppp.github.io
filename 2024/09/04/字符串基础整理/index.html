@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Website mata -->
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<!-- Disable transformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<!-- Website description -->
+
+<meta name="description" content="字符串基础整理" />
+
+
+<!-- Website keywords -->
+
+<meta name="keywords" content="字符串, Hexo" />
+
+
+
+
+<!-- Website rss -->
+
+<link rel="alternate" href="/default" title="Hexo" >
+
+
+<!-- Website favicon -->
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3.0.0" />
+
+
+<!-- Canonical, good for google search engine -->
+<link rel="canonical" href="http://example.com/2024/09/04/字符串基础整理/" />
+
+<!-- Fancybox styling -->
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+<!-- MathJax (LaTeX) support -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });  
+  </script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<!-- Theme styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
+
+<!-- Analytics and push -->
+
+
+
+  
+
+
+
+<!-- LeanCloud Counter -->
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
+</script>
+  
+  <title>字符串基础整理 - Hexo</title>
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div class="scrollPercentage"></div>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Hexo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/">
+      <li class="mobile-menu-item">
+        
+        
+        Home              </li>
+    </a>
+    
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+      <div class="logo-wrapper">  
+  <a href="/." class="logo">Hexo</a>  
+</div>  
+  
+<nav class="site-navbar">  
+    
+    <ul id="menu" class="menu">  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/">  
+              
+              
+              Home  
+              
+          </a>  
+        </li>  
+        
+    </ul>  
+    
+</nav>  
+
+    </header>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      字符串基础整理
+      
+    </h1>
+
+    <div class="post-meta">
+      <span class="post-time">
+        2024-09-04
+      </span>
+      
+      
+      
+    </div>
+  </header>
+
+  
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%AE%97%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">前置算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">一些定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BC%80%E5%87%BD%E6%95%B0%E4%B8%8Ekmp"><span class="toc-number">1.2.</span> <span class="toc-text">前缀函数与kmp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exkmp-Z%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text">exkmp(Z函数)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AC%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.4.</span> <span class="toc-text">AC自动机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84"><span class="toc-number">1.5.</span> <span class="toc-text">后缀数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#manacher"><span class="toc-number">1.6.</span> <span class="toc-text">manacher</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">习题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CF808G"><span class="toc-number">2.1.</span> <span class="toc-text">CF808G</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NOIP2020-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D"><span class="toc-number">2.2.</span> <span class="toc-text">[NOIP2020] 字符串匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%8CTAOI-2%E3%80%8DCiallo%EF%BD%9E-%E2%88%A0%E3%83%BB%CF%89-%E2%8C%92%E2%98%85"><span class="toc-number">2.3.</span> <span class="toc-text">「TAOI-2」Ciallo～(∠・ω&lt; )⌒★</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CF1310C"><span class="toc-number">2.4.</span> <span class="toc-text">CF1310C</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CF1562E"><span class="toc-number">2.5.</span> <span class="toc-text">CF1562E</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F-%E7%AD%89%E5%B7%AE%E5%AD%90%E5%BA%8F%E5%88%97"><span class="toc-number">2.6.</span> <span class="toc-text">[国家集训队] 等差子序列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CF1598G"><span class="toc-number">2.7.</span> <span class="toc-text">CF1598G</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%BD%EF%BC%88%E9%9A%BE%E5%86%99%E7%9A%84%EF%BC%89%E9%A2%98"><span class="toc-number">2.8.</span> <span class="toc-text">好（难写的）题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Statement"><span class="toc-number">2.8.1.</span> <span class="toc-text">Statement</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Solution"><span class="toc-number">2.8.2.</span> <span class="toc-text">Solution</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+  
+
+  <div class="post-content">
+    
+    <h2 id="前置算法"><a href="#前置算法" class="headerlink" title="前置算法"></a>前置算法</h2><h3 id="一些定义"><a href="#一些定义" class="headerlink" title="一些定义"></a>一些定义</h3><p>定义 $s(l,r)$ 为 $s$ 的子串 $s[l\dots r]$ 。</p>
+<h3 id="前缀函数与kmp"><a href="#前缀函数与kmp" class="headerlink" title="前缀函数与kmp"></a>前缀函数与kmp</h3><p>对于一个长度为 $n$ 的字符串 $s$ ，其前缀函数被定义为一个长度为 $n$ 的数组 $\pi$ 。其中 $\pi[i]$ 为长度为 $i$ 的前缀 $t$ 中的最长border长度，border即一个最长的非 $t$ 本身的子串，满足既是 $t$ 的前缀，又是 $t$ 的后缀。也可以用如下语言描述：<br>$$  \pi[i]&#x3D;\max\limits_{k&#x3D;1}^{i-1}(k:s[1\dots k]&#x3D;s[i-(k-1)\dots i]) $$<br>求 $\pi[i]$ 时，我们可以考虑从 $\pi[i-1]$ 继承过来，因为 $s(i-\pi[i]+1,i)$ 一定是先由 $s(i-\pi[i]+1,i-1)$ 匹配一个前缀 $s(1,\pi[i]-1)$ ，$s[i]$ 再和 $s[\pi[i]]$ 匹配。<br>即 $\pi[i]$ 是最大的满足条件的 $v$，其中 $s(1,v-1)$ 是 $s(1,\pi[i-1])$ 的后缀，需要满足的条件为 $s[v]&#x3D;s[i]$ 。<br>如何找出所有的 $v$ 呢？<br>首先 $\pi[i-1]$ 一定是最大的 $v$ ，若它不满足条件，我们要继续找次大的 $v$ 。<br>因为 $s(1,\pi[i-1])&#x3D;s(i-\pi[i-1]+1,i-1]$ ，所以 $\pi[\pi[i-1]]$ 同时是 $s(i-\pi[i-1]+1,i-1)$ 的border 。满足 $s(1,\pi[\pi[i])&#x3D;s(i-\pi[\pi[i]],i-1)$ ，即，次大的 $v$ 就是 $\pi[\pi[i]]$ ，一直向下跳下去即可。<br>时间复杂度感性理解：时间复杂度与跳 $v$ 的次数相关，并且当前 $i$ 跳完后的 $\pi[i]&#x3D;v$ 是继承到 $i+1$ 的，因此它能跳的步数每次会增加一次，而每次失配则跳一次，跳的步数 $\le$ n，因此时间复杂度 $O(n)$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;i++) &#123;</span><br><span class="line">	<span class="type">int</span> j=nxt[i<span class="number">-1</span>];</span><br><span class="line">	<span class="keyword">while</span>(s[j+<span class="number">1</span>]!=s[i]&amp;&amp;j) j=nxt[j];</span><br><span class="line">	nxt[i]=(s[j+<span class="number">1</span>]==s[i]? j+<span class="number">1</span>:<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>kmp算法是前缀函数的运用，用于求 $s$ 中有多少子串和 $t$ 完全相同。<br>其实和上述算法是几乎相同的。<br>一些推论：<br>$s$ 的最小循环元长度为 $n-\pi[n]$ 。并且任何其他满足条件的循环元长度都是其倍数。</p>
+<h3 id="exkmp-Z函数"><a href="#exkmp-Z函数" class="headerlink" title="exkmp(Z函数)"></a>exkmp(Z函数)</h3><p>对于一个长度为 $n$ 的字符串 $s$ ，其Z函数被定义为一个长度为 $n$ 的数组 $z$ 。其中 $z[i]$ 表示 $s$ 与 $s[i\dots n]$ 的LCP。<br>根据定义（当然依旧可以画图直观理解）：</p>
+<p>$$<br>s[i+(x)]\<br>&#x3D;s[l+(i+x-l)]\<br>&#x3D;s[0+(i+x-l)](x\le z[l]+l-i)\<br>&#x3D;s[i-l+(x)]\<br>&#x3D;s[0+(x)](x\le z[i-l])<br>$$</p>
+<p>因此 $z[i] \ge \min(z[l]+l-i,z[i-l])$ 。<br>考虑每一步转换的实际含义，我们发现能使得 $z[l]+l-i$ 越大的 $l(l&lt;i)$ 越优，设 $r&#x3D;z[l]+l$，即找到最大的 $r$。<br>每次我们将 $z[i]\leftarrow \min(z[l]+l-i,z[i-l])$ ，然后暴力往后跳即可，因为 $r$ 递增，因此时间复杂度 $O(n)$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> l=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;i++) &#123;</span><br><span class="line">	<span class="keyword">if</span>(z[l]+l&gt;=i) z[i]=<span class="built_in">min</span>(z[l]+l-i,z[i-l+<span class="number">1</span>]);</span><br><span class="line">	<span class="keyword">while</span>(i+z[i]&lt;=n&amp;&amp;s[z[i]+<span class="number">1</span>]==s[i+z[i]]) z[i]++;</span><br><span class="line">	<span class="keyword">if</span>(z[i]+i&gt;z[l]+l) l=i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="AC自动机"><a href="#AC自动机" class="headerlink" title="AC自动机"></a>AC自动机</h3><p>AC自动机就是把 kmp 放到了 trie 树上，通常用于多文本串匹配，子串问题。</p>
+<p>与 kmp 相同，需要建立 fail 指针，即失配后跳到的位置。</p>
+<p>对于一个点 $x$，我们设 $f$ 为 $x$ 的父亲，并且 $(f,x)$ 的边权为 $c$，则 $f$ 不断地跳 fail 指针，直到当前点有边权为 $c$ 的出边，则 $fail(x)$ 即为出边对应的点。</p>
+<p>与 kmp 不同的是，每次都跳 fail 太慢了。考虑如下代码实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;i++)</span><br><span class="line">        <span class="keyword">if</span>(nxt[<span class="number">0</span>][i]) q.<span class="built_in">push</span>(nxt[<span class="number">0</span>][i]);</span><br><span class="line">    <span class="keyword">while</span>(q.<span class="built_in">size</span>()) &#123;</span><br><span class="line">        <span class="type">int</span> x=q.<span class="built_in">front</span>(); q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(nxt[x][i]) fail[nxt[x][i]]=nxt[fail[x]][i], q.<span class="built_in">push</span>(nxt[x][i]);</span><br><span class="line">            <span class="keyword">else</span> nxt[x][i]=nxt[fail[x]][i]; <span class="comment">//优化</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>即，若当前点 $x$ 没有连向 $c$ 的出边，直接连向 $fail(x)$ 对应的出边，相当于路径压缩，这样就是线性的了。</p>
+<p>AC自动机上的点对应一个串的后缀，而后缀去匹配前缀，就是子串，因此 AC 自动机常用于子串问题。</p>
+<h3 id="后缀数组"><a href="#后缀数组" class="headerlink" title="后缀数组"></a>后缀数组</h3><p>后缀数组将字符串 $s$ 的所有后缀构成的子串都拿出来进行了排序。通常用于解决子串问题。</p>
+<p>考虑如何去求后缀数组，暴力排序，二分哈希求 lcp，时间复杂度 $O(n \log^2 n)$。</p>
+<p>但是这并没有用到后缀的性质，考虑使用倍增的方法去解决这个问题。</p>
+<p>第一次排序使用当前下标对应的值；第二次用当前排名作为第一关键字，它原下标后面那个数的排名作为第二关键字；第 $i$ 次用后面第 $2^{i-1}$ 的排名作为第二关键字。</p>
+<p><img src="https://xxzx.moe/wp-content/uploads/2023/10/%E5%AD%97%E7%AC%A6%E4%B8%B21-300x239.png"></p>
+<h3 id="manacher"><a href="#manacher" class="headerlink" title="manacher"></a>manacher</h3><p>求以每个点为回文中心的最长扩展长度 $l_i$。</p>
+<p>为了避免分类讨论偶回文和奇回文，统一在间隔处添加特殊字符 ‘!’。</p>
+<p>接下来依旧是：从过去已推出的部分来优化当前的操作。</p>
+<p>设 $p$ 为当前 $p+l_p-1$最大的。当前要推 $l_i$。</p>
+<p>若 $i\le p+l_p-1$,设 $j&#x3D;2p-i$ 为 $i$ 关于 $p$ 的对称点。画图可得，$p_i\leftarrow \min(p+l_p-i,l_j)$。</p>
+<p>更详细地说，设 $sl(l,r)$ 为将 $s(l,r)$ 首尾翻转的结果。不妨假设 $i+l_j-1\le p+l_p-1$，由一系列定义可知：</p>
+<p>$s(i,i+l_j-1)&#x3D;sl(j,j-l_j+1)&#x3D;s(j,j+l_j-1)&#x3D;sl(i,i-l_i+1)$</p>
+<p>接下来暴力扩展即可，每次扩展 $\max(p+l_p-1)$ 递增，时间复杂度 $O(n)$。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++) &#123;</span><br><span class="line">    l[i]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;=p+l[p]<span class="number">-1</span>) l[i]=<span class="built_in">min</span>(l[<span class="number">2</span>*p-i],p+l[p]-i);</span><br><span class="line">    <span class="keyword">while</span>(i+l[i]&lt;=n&amp;&amp;i-l[i]&gt;=<span class="number">1</span>&amp;&amp;st[i+l[i]]==st[i-l[i]]) l[i]++;</span><br><span class="line">    <span class="keyword">if</span>(i+l[i]&gt;p+l[p]) p=i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h2><h3 id="CF808G"><a href="#CF808G" class="headerlink" title="CF808G"></a>CF808G</h3><p>如果匹配的 $s$ 不能重叠，设 $f_i$ 表示 $t(1,i)$ 最多能匹配几个 $s$ ，转移是平凡的。如果能重叠，还要设 $g_i$ 表示 $t(1,i)$ 并强制钦定以 $i$ 结尾的串匹配了 $s$ ，辅助转移 $f$ 。我们发现重叠的部分就是border，一直跳 $nxt$ 即可。</p>
+<h3 id="NOIP2020-字符串匹配"><a href="#NOIP2020-字符串匹配" class="headerlink" title="[NOIP2020] 字符串匹配"></a>[NOIP2020] 字符串匹配</h3><p>首先可以预处理出 $pre,suf$ 分别表示每一个前缀和后缀出现奇数次字符的数量。<br>先从小到大枚举AB长度 $i$ ，后面就是C，方案数即 $pre_j\le suf_i+1 (j&lt;i)$ 的数量。<br>因为 $i$ 是从小到大枚举的，我们设 $c$ ，每次 $c[pre_i\dots 26]++$ 即可。<br>因为AB可以重复好几段，我们枚举 $i$ 的倍数，并判断是否形如 $ABAB\dots AB$ ，可以用kmp的循环元，也可以哈希。</p>
+<h3 id="「TAOI-2」Ciallo～-∠・ω-⌒★"><a href="#「TAOI-2」Ciallo～-∠・ω-⌒★" class="headerlink" title="「TAOI-2」Ciallo～(∠・ω&lt; )⌒★"></a>「TAOI-2」Ciallo～(∠・ω&lt; )⌒★</h3><p>$t$ 有可能在 $s$ 中是完整的段，是好算的。<br>也可能是中间扣掉一段，拼成 $t$ 。<br>设 $t$ 的长度为 $n$ 。枚举左半段的长度 $i$ ，设 $s(j,j+i-1)&#x3D;t(1,i)$ 的合法的 $j$ 的集合为A，同理 $s(j-n+1+i,j)&#x3D;t(i+1,n)$ 的合法的 $j$ 的集合为B。<br>我们要计算的是 $j-i+1&gt;n(i\in A,j\in B)$ 的个数。<br>我们可以算出每一个端点作为 $t$ 的开头能向右延伸多长，以及作为结尾能向左延伸多长。每个点在集合中的进出都只有 $1$ 次，其贡献可以在树状数组中求得。</p>
+<h3 id="CF1310C"><a href="#CF1310C" class="headerlink" title="CF1310C"></a>CF1310C</h3><p>把S的所有子串拿出来按字典序升序排序，二分，判断即数出将S划分成 $m$ 段，且每段的字典序都小于等于二分的子串的方案数， $O(n^2)$ dp是容易的，判断两串字典序可以先预处理出每两个后缀的LCP。</p>
+<h3 id="CF1562E"><a href="#CF1562E" class="headerlink" title="CF1562E"></a>CF1562E</h3><p>$s(l,r+1)$ 的字典序一定大于等于 $s(l,r)$ 。<br>结论是若填了 $s(l,r)$ ，则 $s(l,r+1),s(l,r+2),\dots,s(l,n)$ 都选上一定不劣。<br>反证，若 $s(l,n)$ 不选能使答案变优，则一定是增加了一些字典序小于 $s(l,n)$ ，大于 $s(l,n-1)$ 的串，我们发现这样的串的前缀一定是 $s(l,n-1)$ 因此对于固定的 $i$ ，满足条件的 $s(i,i+n-l)$ 最多只有一个，如此归纳下去发现不会更优。<br>因此可以dp，设 $f_i$ 表示选择了以 $i$ 为左端点的一堆连续串，最大的个数。预处理分别以 $i,j$ 为左端点的串的lcp即可转移。</p>
+<h3 id="国家集训队-等差子序列"><a href="#国家集训队-等差子序列" class="headerlink" title="[国家集训队] 等差子序列"></a>[国家集训队] 等差子序列</h3><p>只需要找出长度为 $3$ 的等差数列。<br>$i$ 从 $1 \rightarrow n$ 枚举这个数是否可以作为等差数列的中间项，设 $p$ ，满足 $p[a[j]]&#x3D;1(j&lt;i)$，那么判定等价于存在 $v$ ，满足 $p[a[i]+v]+p[a[i]-v]&#x3D;1$ 。<br>可以发现不合法的时候 $p$ 是以 $a_i$ 为中心的回文串。用线段树去维护一段区间正序&#x2F;逆序的哈希值。</p>
+<h3 id="CF1598G"><a href="#CF1598G" class="headerlink" title="CF1598G"></a>CF1598G</h3><p>加法运算的进位至多为 $1$。那么其中一个数的位数一定 $\ge |s|-1$ 。<br>若我们确定了其中一个数，记它与 $s$ 的 lcp 为 $l$，另一个数的长度一定为 $l$ 或 $l-1$ 。<br>lcp 用 Z 函数求解，两数加法使用十进制下的哈希，随机多个模数。</p>
+<h3 id="好（难写的）题"><a href="#好（难写的）题" class="headerlink" title="好（难写的）题"></a>好（难写的）题</h3><h4 id="Statement"><a href="#Statement" class="headerlink" title="Statement"></a>Statement</h4><p>将长度为 $n$ 的字符串 $S$ 分成五段 $A+B+C+D+E&#x3D;S$,其中$A,B,C,D,E$ 可以为空串。</p>
+<p>最大化 $|A|+|C|+|E|$，使得 $A+C+E$ 是回文串。</p>
+<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><p>首先 $A,E$ 一定是原串中的一段前&#x2F;后缀，且 $A$ 中的一段前缀是和 $E$ 中的一段后缀匹配的，可以发现对于这一部分，能匹配就匹配，一定不劣，然后就可以扣掉了。</p>
+<p>现在的子问题变为，将串分为 $A+B+C+D$ 四部分，使得 $A+C$ 或 $B+D$ 为回文串且长度尽可能大。将串翻转，$B+D$ 的情况就变成 $A+C$，因此接下来只需要讨论 $A+C$ 的情况。</p>
+<p>分类讨论，枚举 $A+C$ 的回文中心在哪。</p>
+<p>若回文中心在 $A$ 中，相当于 $A$ 的一段后缀自成一段回文串，剩下部分在右侧存在匹配的部分。贪心地想，$A$ 后缀形成的回文串一定是尽可能大的，用manacher求解。剩下的部分，可以将原串与原串反串进行拼接，就变成了lcp问题，通过exkmp求解。回文中心在 $B$ 中的情况是同理的。</p>
+<p>代码调了比较久，列举一些错误点：</p>
+<ol>
+<li><p>manacher中加入了特殊字符，去掉的时候，注意是奇回文还是偶回文，它们向两边的扩展长度不一定一样长。</p>
+</li>
+<li><p>exkmp中，由于经过了字符串拼接，注意处理边界问题，取值不能超过原串。</p>
+</li>
+</ol>
+<p>以及如何调试：讨论下来一共就两种情况（回文中心在哪），可以尝试手造两种情况的小数据，看看是哪部分错的。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Buttiyeeppp/Code/blob/master/HLOJ/C23151.cpp">Code</a></p>
+
+    
+  </div>
+
+  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="http://example.com">John Doe</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="http://example.com/2024/09/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86/">http://example.com/2024/09/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
+      
+      <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      <a class="prev" href="/2024/09/09/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE-vscode/">  
+        <i class="iconfont icon-left"></i>  
+        <span class="prev-text nav-default">如何配置 vscode</span>  
+        <span class="prev-text nav-mobile">Prev</span>  
+      </a>  
+      
+      
+      <a class="next" href="/2024/03/29/hello-world/">  
+        <span class="next-text nav-default">Hello World</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
+      
+  </nav>  
+  
+
+  </footer>
+  
+
+</article>
+        </div>
+          
+  <div class="comments" id="comments">  
+      
+  </div>  
+  
+
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+      <!-- Social Links -->
+
+<div class="social-links">
+  
+  
+  
+  
+  <a href="mailto:Buttiyeeppp@outlook.com" class="iconfont icon-email" title="email"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://github.com/Buttiyeeppp" class="iconfont icon-github" title="github"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+  
+</div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme -
+    <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/zeed-w-beez/hexo-theme-even">Even</a>
+  </span>
+  <span class="division">|</span>
+  <span class="hosting-info">
+    footer.hosting
+  </span>
+
+  <span class="copyright-year">
+    <span>
+      
+      &copy;
+      
+      2015 - 2024      
+    </span>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+
+    <span class="author">John Doe</span>
+  </span>
+
+</div>
+    </footer>
+    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
+  </div>
+    
+    
+    
+    
+    
+    
+    
+  
+
+  
+
+
+
+
+
+
+
+<script type="text/javascript" src="/lib/jquery"></script>
+
+
+
+<script type="text/javascript" src="/lib/slideout"></script>
+
+
+
+<script type="text/javascript" src="/lib/fancybox"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
+</body>
+
+</html>
