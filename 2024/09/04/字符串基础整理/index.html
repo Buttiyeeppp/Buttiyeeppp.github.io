@@ -23,7 +23,7 @@
 
 <!-- Website keywords -->
 
-<meta name="keywords" content="字符串, Buttiyeeppp&#39;s Blog" />
+<meta name="keywords" content="字符串, kmp, exkmp, AC自动机，后缀数组，manacher, Buttiyeeppp&#39;s Blog" />
 
 
 
@@ -157,9 +157,7 @@
 
   <div class="post-content">
     
-    <span id="more"></span>
-
-<h2 id="前置算法"><a href="#前置算法" class="headerlink" title="前置算法"></a>前置算法</h2><h3 id="一些定义"><a href="#一些定义" class="headerlink" title="一些定义"></a>一些定义</h3><p>定义 $s(l,r)$ 为 $s$ 的子串 $s[l\dots r]$ 。</p>
+    <h2 id="前置算法"><a href="#前置算法" class="headerlink" title="前置算法"></a>前置算法</h2><h3 id="一些定义"><a href="#一些定义" class="headerlink" title="一些定义"></a>一些定义</h3><p>定义 $s(l,r)$ 为 $s$ 的子串 $s[l\dots r]$ 。</p>
 <h3 id="前缀函数与kmp"><a href="#前缀函数与kmp" class="headerlink" title="前缀函数与kmp"></a>前缀函数与kmp</h3><p>对于一个长度为 $n$ 的字符串 $s$ ，其前缀函数被定义为一个长度为 $n$ 的数组 $\pi$ 。其中 $\pi[i]$ 为长度为 $i$ 的前缀 $t$ 中的最长border长度，border即一个最长的非 $t$ 本身的子串，满足既是 $t$ 的前缀，又是 $t$ 的后缀。也可以用如下语言描述：<br>$$  \pi[i]&#x3D;\max\limits_{k&#x3D;1}^{i-1}(k:s[1\dots k]&#x3D;s[i-(k-1)\dots i]) $$<br>求 $\pi[i]$ 时，我们可以考虑从 $\pi[i-1]$ 继承过来，因为 $s(i-\pi[i]+1,i)$ 一定是先由 $s(i-\pi[i]+1,i-1)$ 匹配一个前缀 $s(1,\pi[i]-1)$ ，$s[i]$ 再和 $s[\pi[i]]$ 匹配。<br>即 $\pi[i]$ 是最大的满足条件的 $v$，其中 $s(1,v-1)$ 是 $s(1,\pi[i-1])$ 的后缀，需要满足的条件为 $s[v]&#x3D;s[i]$ 。<br>如何找出所有的 $v$ 呢？<br>首先 $\pi[i-1]$ 一定是最大的 $v$ ，若它不满足条件，我们要继续找次大的 $v$ 。<br>因为 $s(1,\pi[i-1])&#x3D;s(i-\pi[i-1]+1,i-1]$ ，所以 $\pi[\pi[i-1]]$ 同时是 $s(i-\pi[i-1]+1,i-1)$ 的border 。满足 $s(1,\pi[\pi[i])&#x3D;s(i-\pi[\pi[i]],i-1)$ ，即，次大的 $v$ 就是 $\pi[\pi[i]]$ ，一直向下跳下去即可。<br>时间复杂度感性理解：时间复杂度与跳 $v$ 的次数相关，并且当前 $i$ 跳完后的 $\pi[i]&#x3D;v$ 是继承到 $i+1$ 的，因此它能跳的步数每次会增加一次，而每次失配则跳一次，跳的步数 $\le$ n，因此时间复杂度 $O(n)$ 。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;i++) &#123;</span><br><span class="line">	<span class="type">int</span> j=nxt[i<span class="number">-1</span>];</span><br><span class="line">	<span class="keyword">while</span>(s[j+<span class="number">1</span>]!=s[i]&amp;&amp;j) j=nxt[j];</span><br><span class="line">	nxt[i]=(s[j+<span class="number">1</span>]==s[i]? j+<span class="number">1</span>:<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>kmp算法是前缀函数的运用，用于求 $s$ 中有多少子串和 $t$ 完全相同。<br>其实和上述算法是几乎相同的。<br>一些推论：<br>$s$ 的最小循环元长度为 $n-\pi[n]$ 。并且任何其他满足条件的循环元长度都是其倍数。</p>
@@ -245,6 +243,12 @@
     <div class="post-tags">
       
       <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+      
+      <a href="/tags/kmp/">kmp</a>
+      
+      <a href="/tags/exkmp/">exkmp</a>
+      
+      <a href="/tags/AC%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%8C%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%EF%BC%8Cmanacher/">AC自动机，后缀数组，manacher</a>
       
     </div>
     
