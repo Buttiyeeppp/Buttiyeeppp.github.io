@@ -18,7 +18,7 @@
 
 <!-- Website description -->
 
-<meta name="description" content="None" />
+<meta name="description" content="dp 基础算法概述。" />
 
 
 <!-- Website keywords -->
@@ -193,15 +193,15 @@
 <p>（似乎以前有一个很好的关于证明四边形不等式的课件）</p>
 <p>概念</p>
 <ul>
-<li>四边形不等式：即对于任意 $l \le l’ \le r’ \le r $ 都满足 $w(l,r)+w(l,r’) \ge w(l,r’)+w(l’,r)$</li>
-<li>区间包含单调性：即对于任意 $l \le l’ \le r’ \le r $ 都满足 $w(l,r) \ge w(l’,r’)$</li>
+<li>四边形不等式：即对于任意 $l \le l’ \le r’ \le r $ 都满足 $w(l,r)+w(l,r’) \ge w(l,r’)+w(l’,r)$。</li>
+<li>区间包含单调性：即对于任意 $l \le l’ \le r’ \le r $ 都满足 $w(l,r) \ge w(l’,r’)$ 。</li>
 </ul>
 <h3 id="区间类2D1D型动态规划"><a href="#区间类2D1D型动态规划" class="headerlink" title="区间类2D1D型动态规划"></a>区间类2D1D型动态规划</h3><p>形如 $dp_{l,r}&#x3D;\min\limits_k(dp_{l,k}+dp_{k+1,r})+w(l,r)$ 。</p>
 <p> 直接转移时间复杂度为 $O(n^3)$ 。</p>
 <p>Lemma: $w(l,r)$ 同时满足四边形不等式和区间包含单调性，则可以证明状态 $f_{l,r}$ 满足四边形不等式。</p>
-<p>Theorem:若状态 $f$ 满足四边形不等式，则对于状态 $f_{l,r}$ 的最优决策点 $m_{l,r}$ 有 $m_{l,r-1} \le m_{l,r} \le m_{l+1,r}$ </p>
+<p>Theorem:若状态 $f$ 满足四边形不等式，则对于状态 $f_{l,r}$ 的最优决策点 $m_{l,r}$ 有 $m_{l,r-1} \le m_{l,r} \le m_{l+1,r}$ 。</p>
 <p><a target="_blank" rel="noopener" href="https://oi-wiki.org/dp/opt/quadrangle/#%E5%8C%BA%E9%97%B4%E7%B1%BB2d1d%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8">证明</a>。</p>
-<p>枚举的决策点总数为<br>$$<br>\sum \limits_{1\le l\le r\le n}m_{l+1,r}-m_{l,r-1}&#x3D;\sum\limits_{i&#x3D;1}^nm_{i,n}-m_{1,n-i+1} \le n^2<br>$$<br>时间复杂度 $O(n^2)$ 。</p>
+<p>枚举的决策点总数为 ：<br>$$<br>\sum \limits_{1\le l\le r\le n}m_{l+1,r}-m_{l,r-1}&#x3D;\sum\limits_{i&#x3D;1}^nm_{i,n}-m_{1,n-i+1} \le n^2<br>$$<br>时间复杂度 $O(n^2)$ 。</p>
 <h3 id="分治优化"><a href="#分治优化" class="headerlink" title="分治优化"></a>分治优化</h3><p>形如 $f_i&#x3D;\min\limits_{j&lt;i}(g_j+w(j,i))$ 。</p>
 <p>即当前的转移不依赖于同层的dp值，因此我们可以任意决定同层内的dp计算顺序，常见于分层转移的二维dp。</p>
 <p>当 $w(l,r)$ 满足四边形不等式，则决策点依然满足单调性 $m_i\le m_{i+1}$<br>考虑分治，每次选取mid算出其决策点，则两边的决策点上界&#x2F;下界得到更新。</p>
