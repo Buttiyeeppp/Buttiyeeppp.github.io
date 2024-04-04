@@ -1,217 +1,47 @@
-<!DOCTYPE html>
-<html lang="cn">
-
-<head>
-  <!-- Website mata -->
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-
-<!-- Disable transformation -->
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-<!-- Website description -->
-
-<meta name="description" content="未完结。目前只有 Treap。" />
-
-
-<!-- Website keywords -->
-
-<meta name="keywords" content="平衡树, treap, Buttiyeeppp&#39;s Blog" />
-
-
-
-
-<!-- Website rss -->
-
-<link rel="alternate" href="/default" title="Buttiyeeppp's Blog" >
-
-
-<!-- Website favicon -->
-
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3.0.0" />
-
-
-<!-- Canonical, good for google search engine -->
-<link rel="canonical" href="http://example.com/2024/02/25/平衡树学习笔记/" />
-
-<!-- Fancybox styling -->
-
-<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
-
-
-<!-- MathJax (LaTeX) support -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });  
-  </script>
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
-<!-- Theme styling -->
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
-
-<!-- Analytics and push -->
-
-
-
-  
-
-
-
-<!-- LeanCloud Counter -->
-
-
-<script>
-  window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
-</script>
-  
-  <title>平衡树学习笔记 - Buttiyeeppp&#39;s Blog</title>
-
-<meta name="generator" content="Hexo 7.1.1"></head>
-
-<body>
-  <div class="scrollPercentage"></div>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/." class="logo">Buttiyeeppp&#39;s Blog</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    
-    <a href="/">
-      <li class="mobile-menu-item">
-        
-        
-        Home              </li>
-    </a>
-    
-    <a href="/archives/">
-      <li class="mobile-menu-item">
-        
-        
-        Archives              </li>
-    </a>
-    
-    <a href="/tags/">
-      <li class="mobile-menu-item">
-        
-        
-        Tags              </li>
-    </a>
-    
-    <a href="/categories/">
-      <li class="mobile-menu-item">
-        
-        
-        Categories              </li>
-    </a>
-    
-  </ul>
-</nav>
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-      <div class="logo-wrapper">  
-  <a href="/." class="logo">Buttiyeeppp's Blog</a>  
-</div>  
-  
-<nav class="site-navbar">  
-    
-    <ul id="menu" class="menu">  
-        
-        <li class="menu-item">  
-          <a class="menu-item-link" href="/">  
-              
-              
-              Home  
-              
-          </a>  
-        </li>  
-        
-        <li class="menu-item">  
-          <a class="menu-item-link" href="/archives/">  
-              
-              
-              Archives  
-              
-          </a>  
-        </li>  
-        
-        <li class="menu-item">  
-          <a class="menu-item-link" href="/tags/">  
-              
-              
-              Tags  
-              
-          </a>  
-        </li>  
-        
-        <li class="menu-item">  
-          <a class="menu-item-link" href="/categories/">  
-              
-              
-              Categories  
-              
-          </a>  
-        </li>  
-        
-    </ul>  
-    
-</nav>  
-
-    </header>
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      平衡树学习笔记
-      
-    </h1>
-
-    <div class="post-meta">
-      <span class="post-time">
-        2024-02-25
-      </span>
-      
-      
-      <span class="post-category">
-        
-        <a href="/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">算法笔记</a>
-        
-      </span>
-      
-      
-    </div>
-  </header>
-
-  
-  <div class="post-toc" id="post-toc">
-    <h2 class="post-toc-title">Contents</h2>
-    <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">平衡树定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Treap"><span class="toc-number">2.</span> <span class="toc-text">Treap</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E6%97%8B-Treap"><span class="toc-number">2.1.</span> <span class="toc-text">有旋 Treap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%BA%A6%E5%AE%9A"><span class="toc-number">2.1.1.</span> <span class="toc-text">前置约定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC"><span class="toc-number">2.1.2.</span> <span class="toc-text">旋转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5"><span class="toc-number">2.1.3.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4"><span class="toc-number">2.1.4.</span> <span class="toc-text">删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%8E%92%E5%90%8D-%E6%9F%A5%E8%AF%A2%E5%89%8D-k-%E5%A4%A7-%E6%9F%A5%E8%AF%A2%E5%89%8D%E9%A9%B1-%E6%9F%A5%E8%AF%A2%E5%90%8E%E7%BB%A7"><span class="toc-number">2.1.5.</span> <span class="toc-text">查询排名&#x2F;查询前 $k$ 大&#x2F;查询前驱&#x2F;查询后继</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E6%97%8BTreap%E2%80%94%E2%80%94fhq-treap"><span class="toc-number">2.2.</span> <span class="toc-text">无旋Treap——fhq treap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%BA%A6%E5%AE%9A-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">前置约定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E5%80%BC%E5%88%86%E8%A3%82"><span class="toc-number">2.2.2.</span> <span class="toc-text">按值分裂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E6%8E%92%E5%90%8D%E5%88%86%E8%A3%82"><span class="toc-number">2.2.3.</span> <span class="toc-text">按排名分裂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E5%B9%B6"><span class="toc-number">2.2.4.</span> <span class="toc-text">合并</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5-1"><span class="toc-number">2.2.5.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4-1"><span class="toc-number">2.2.6.</span> <span class="toc-text">删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%8E%92%E5%90%8D-%E6%9F%A5%E8%AF%A2%E5%89%8D-k-%E5%A4%A7-%E6%9F%A5%E8%AF%A2%E5%89%8D%E9%A9%B1-%E6%9F%A5%E8%AF%A2%E5%90%8E%E7%BB%A7-1"><span class="toc-number">2.2.7.</span> <span class="toc-text">查询排名&#x2F;查询前 $k$ 大&#x2F;查询前驱&#x2F;查询后继</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E6%A0%91"><span class="toc-number">2.2.8.</span> <span class="toc-text">建树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BA%E9%97%B4%E7%BF%BB%E8%BD%AC"><span class="toc-number">2.2.9.</span> <span class="toc-text">区间翻转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">2.2.10.</span> <span class="toc-text">持久化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol>
-    </div>
-  </div>
-  
-
-  <div class="post-content">
-    
-    <h1 id="平衡树定义"><a href="#平衡树定义" class="headerlink" title="平衡树定义"></a>平衡树定义</h1><p>二叉搜索树是一种二叉树的树形数据结构，其满足任意点的权值大于其左儿子（若存在）权值，且小于右儿子（若存在）权值。</p>
+<!DOCTYPE html><html lang="cn"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Buttiyeeppp"><meta name="copyright" content="Buttiyeeppp"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>平衡树学习笔记 | Buttiyeeppp's Blog</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"example.com","root":"/","title":"云游君的小站","version":"1.10.11","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><meta name="description" content="未完结。目前只有 Treap。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="平衡树学习笔记">
+<meta property="og:url" content="http://example.com/2024/02/25/%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Buttiyeeppp&#39;s Blog">
+<meta property="og:description" content="未完结。目前只有 Treap。">
+<meta property="og:locale">
+<meta property="og:image" content="https://oi-wiki.org/ds/images/treap-rotate.svg">
+<meta property="og:image" content="https://oi-wiki.org/ds/images/treap-none-rot-split-by-val.svg">
+<meta property="og:image" content="https://oi-wiki.org/ds/images/treap-none-rot-seg-flip-ex.svg">
+<meta property="article:published_time" content="2024-02-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-04-03T07:00:52.564Z">
+<meta property="article:author" content="Buttiyeeppp">
+<meta property="article:tag" content="平衡树">
+<meta property="article:tag" content="treap">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oi-wiki.org/ds/images/treap-rotate.svg"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Buttiyeeppp"><img width="96" loading="lazy" src="/yun.png" alt="Buttiyeeppp"></a><div class="site-author-name"><a href="/about/">Buttiyeeppp</a></div><span class="site-name">Buttiyeeppp's Blog</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">5</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">2</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">4</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">平衡树定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Treap"><span class="toc-number">2.</span> <span class="toc-text">Treap</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E6%97%8B-Treap"><span class="toc-number">2.1.</span> <span class="toc-text">有旋 Treap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%BA%A6%E5%AE%9A"><span class="toc-number">2.1.1.</span> <span class="toc-text">前置约定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC"><span class="toc-number">2.1.2.</span> <span class="toc-text">旋转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5"><span class="toc-number">2.1.3.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4"><span class="toc-number">2.1.4.</span> <span class="toc-text">删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%8E%92%E5%90%8D-%E6%9F%A5%E8%AF%A2%E5%89%8D-k-%E5%A4%A7-%E6%9F%A5%E8%AF%A2%E5%89%8D%E9%A9%B1-%E6%9F%A5%E8%AF%A2%E5%90%8E%E7%BB%A7"><span class="toc-number">2.1.5.</span> <span class="toc-text">查询排名&#x2F;查询前 $k$ 大&#x2F;查询前驱&#x2F;查询后继</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E6%97%8BTreap%E2%80%94%E2%80%94fhq-treap"><span class="toc-number">2.2.</span> <span class="toc-text">无旋Treap——fhq treap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%BA%A6%E5%AE%9A-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">前置约定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E5%80%BC%E5%88%86%E8%A3%82"><span class="toc-number">2.2.2.</span> <span class="toc-text">按值分裂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E6%8E%92%E5%90%8D%E5%88%86%E8%A3%82"><span class="toc-number">2.2.3.</span> <span class="toc-text">按排名分裂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E5%B9%B6"><span class="toc-number">2.2.4.</span> <span class="toc-text">合并</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5-1"><span class="toc-number">2.2.5.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4-1"><span class="toc-number">2.2.6.</span> <span class="toc-text">删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%8E%92%E5%90%8D-%E6%9F%A5%E8%AF%A2%E5%89%8D-k-%E5%A4%A7-%E6%9F%A5%E8%AF%A2%E5%89%8D%E9%A9%B1-%E6%9F%A5%E8%AF%A2%E5%90%8E%E7%BB%A7-1"><span class="toc-number">2.2.7.</span> <span class="toc-text">查询排名&#x2F;查询前 $k$ 大&#x2F;查询前驱&#x2F;查询后继</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E6%A0%91"><span class="toc-number">2.2.8.</span> <span class="toc-text">建树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BA%E9%97%B4%E7%BF%BB%E8%BD%AC"><span class="toc-number">2.2.9.</span> <span class="toc-text">区间翻转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">2.2.10.</span> <span class="toc-text">持久化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="http://example.com/2024/02/25/%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Buttiyeeppp"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Buttiyeeppp's Blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">平衡树学习笔记</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="Created: 2024-02-25 00:00:00" itemprop="dateCreated datePublished" datetime="2024-02-25T00:00:00+08:00">2024-02-25</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="Modified: 2024-04-03 15:00:52" itemprop="dateModified" datetime="2024-04-03T15:00:52+08:00">2024-04-03</time></div><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">算法笔记</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">平衡树</span></a><a class="tag-item" href="/tags/treap/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">treap</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h1 id="平衡树定义"><a href="#平衡树定义" class="headerlink" title="平衡树定义"></a>平衡树定义</h1><p>二叉搜索树是一种二叉树的树形数据结构，其满足任意点的权值大于其左儿子（若存在）权值，且小于右儿子（若存在）权值。</p>
 <p>根据这个性质，我们可以很容易实现如下功能：</p>
 <ul>
 <li>查找最值</li>
@@ -226,7 +56,7 @@
 <h3 id="前置约定"><a href="#前置约定" class="headerlink" title="前置约定"></a>前置约定</h3><p>对于节点 $i$，定义 $ls,rs,val,rk,w,sz$ 分别为左儿子，右儿子，权值，随机权值，权值个数，子树大小。</p>
 <p>定义 $cnt$ 为节点总数，$rt$ 为根节点。</p>
 <h3 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h3><p>通过不改变树性质的同时改变树的层数。如图：</p>
-<p> <img src="https://oi-wiki.org/ds/images/treap-rotate.svg"></p>
+<p> <img src="https://oi-wiki.org/ds/images/treap-rotate.svg" loading="lazy"></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">pushup</span><span class="params">(<span class="type">int</span> id)</span> </span>&#123; sz[id]=w[id]+sz[ls[id]]+sz[rs[id]]; &#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">lrotate</span><span class="params">(<span class="type">int</span> &amp;id)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> t=rs[id];</span><br><span class="line">    rs[id]=ls[t], ls[t]=id;</span><br><span class="line">    <span class="built_in">pushup</span>(id), <span class="built_in">pushup</span>(t);</span><br><span class="line">    id=t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">rrotate</span><span class="params">(<span class="type">int</span> &amp;id)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> t=ls[id];</span><br><span class="line">    ls[id]=rs[t], rs[t]=id;</span><br><span class="line">    <span class="built_in">pushup</span>(id), <span class="built_in">pushup</span>(t);</span><br><span class="line">    id=t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>插入节点跟普通二叉搜索树类似，但需要通过旋转操作满足堆的性质</p>
@@ -248,7 +78,7 @@
 
 <h3 id="按值分裂"><a href="#按值分裂" class="headerlink" title="按值分裂"></a>按值分裂</h3><p>此函数将以 $id$ 为根的子树分裂成 $\le x$ 和 $&gt; x$ 两部分，并返回两部分的新根。</p>
 <p>分类讨论根节点的情况，则其左儿子或右儿子一定整体属于某一部分，递归分裂另一部分子树即可。</p>
-<p><img src="https://oi-wiki.org/ds/images/treap-none-rot-split-by-val.svg"></p>
+<p><img src="https://oi-wiki.org/ds/images/treap-none-rot-split-by-val.svg" loading="lazy"></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">PII <span class="title">splitv</span><span class="params">(<span class="type">int</span> id,<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!id) <span class="keyword">return</span> &#123;<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">if</span>(val[id]&lt;=x) &#123;</span><br><span class="line">        PII res=<span class="built_in">splitv</span>(rs[id],x);</span><br><span class="line">        rs[id]=res.first, <span class="built_in">pushup</span>(id);</span><br><span class="line">        <span class="keyword">return</span> &#123;id,res.second&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        PII res=<span class="built_in">splitv</span>(ls[id],x);</span><br><span class="line">        ls[id]=res.second, <span class="built_in">pushup</span>(id);</span><br><span class="line">        <span class="keyword">return</span> &#123;res.first,id&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="按排名分裂"><a href="#按排名分裂" class="headerlink" title="按排名分裂"></a>按排名分裂</h3><p>此函数将以 $id$ 为根的子树分裂成 $\le x,&gt;x$ 两部分。</p>
@@ -278,7 +108,7 @@
 
 <h3 id="区间翻转"><a href="#区间翻转" class="headerlink" title="区间翻转"></a>区间翻转</h3><p>需要使得树的中序遍历等于维护的序列。</p>
 <p>将区间 $[l,r]$ 翻转的操作，可以将树分成 $[1,l-1],[l,r],[r+1,n]$ 三个区间，对中间的树进行翻转，再合并。暴力翻转显然不行，在节点上打上懒标记，访问到再下传即可。</p>
-<p><img src="https://oi-wiki.org/ds/images/treap-none-rot-seg-flip-ex.svg"></p>
+<p><img src="https://oi-wiki.org/ds/images/treap-none-rot-seg-flip-ex.svg" loading="lazy"></p>
 <p>在 split 和 merge 等函数中要及时下传懒标记，在此不展示。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">pushdown</span><span class="params">(<span class="type">int</span> id)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!lz[id]) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">swap</span>(ls[id],rs[id]);</span><br><span class="line">    lz[ls[id]]^=<span class="number">1</span>, lz[rs[id]]^=<span class="number">1</span>, lz[id]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    PII res1=<span class="built_in">splitrk</span>(rt,l<span class="number">-1</span>), res2=<span class="built_in">splitrk</span>(res1.second,r-l+<span class="number">1</span>);</span><br><span class="line">    lz[res2.first]^=<span class="number">1</span>;</span><br><span class="line">    rt=<span class="built_in">merge</span>(<span class="built_in">merge</span>(res1.first,res2.first),res2.second);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -286,194 +116,4 @@
 <p>可以用这种方式理解：当某个节点的左右儿子有变化，就需要新建节点。</p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/treap/">Treap - OI Wiki</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zheyuanxie/p/fhq-treap.html">无旋树堆(FHQ-Treap)学习笔记 _</a></p>
-
-    
-  </div>
-
-  
-  <!-- Post Copyright -->
-
-<div class="post-copyright">
-  <p class="copyright-item">
-    <span>Author: </span>
-    <a href="http://example.com">Buttiyeeppp</a>
-  </p>
-  <p class="copyright-item">
-    <span>Link: </span>
-    <a href="http://example.com/2024/02/25/%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">http://example.com/2024/02/25/%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a>
-  </p>
-  <p class="copyright-item">
-    <span>License: </span>
-    
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
-  </p>
-</div>
-
-    
-
-  
-
-  
-  <footer class="post-footer">
-    
-    <div class="post-tags">
-      
-      <a href="/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91/">平衡树</a>
-      
-      <a href="/tags/treap/">treap</a>
-      
-    </div>
-    
-      
-  <nav class="post-nav">  
-      
-      
-      <a class="next" href="/2023/09/14/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">  
-        <span class="next-text nav-default">经验总结</span>  
-        <span class="prev-text nav-mobile">Next</span>  
-        <i class="iconfont icon-right"></i>  
-      </a>  
-      
-  </nav>  
-  
-
-  </footer>
-  
-
-</article>
-        </div>
-          
-  <div class="comments" id="comments">  
-      
-  </div>  
-  
-
-      </div>
-    </main>
-    <footer id="footer" class="footer">
-      <!-- Social Links -->
-
-<div class="social-links">
-  
-  
-  
-  
-  <a href="mailto:Buttiyeeppp@outlook.com" class="iconfont icon-email" title="email"></a>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <a target="_blank" rel="noopener" href="https://github.com/Buttiyeeppp" class="iconfont icon-github" title="github"></a>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  
-  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
-  
-</div>
-
-
-
-<div class="copyright">
-  <span class="power-by">
-    Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    Theme -
-    <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/zeed-w-beez/hexo-theme-even">Even</a>
-  </span>
-  <span class="division">|</span>
-  <span class="hosting-info">
-    footer.hosting
-  </span>
-
-  <span class="copyright-year">
-    <span>
-      
-      &copy;
-      
-      2024      
-    </span>
-
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-
-    <span class="author">Buttiyeeppp</span>
-  </span>
-
-</div>
-    </footer>
-    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
-  </div>
-    
-    
-    
-    
-    
-    
-    
-  
-
-  
-
-
-
-
-
-
-
-<script type="text/javascript" src="/lib/jquery"></script>
-
-
-
-<script type="text/javascript" src="/lib/slideout"></script>
-
-
-
-<script type="text/javascript" src="/lib/fancybox"></script>
-
-
-
-  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
-</body>
-
-</html>
+</div></section><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="Donate" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><span class="icon iconify" data-icon="ri:hand-coin-line"></span></span><div id="reward-comment">I'm so cute. Please give me money.</div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Buttiyeeppp</li><li class="post-copyright-link"><strong>Post link: </strong><a href="http://example.com/2024/02/25/%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="平衡树学习笔记">http://example.com/2024/02/25/%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2023/09/14/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" rel="next" title="经验总结"><span class="post-nav-text">经验总结</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2024 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> Buttiyeeppp</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v7.1.1</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></body></html>
