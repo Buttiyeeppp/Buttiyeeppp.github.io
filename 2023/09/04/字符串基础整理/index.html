@@ -424,9 +424,9 @@ s[i+(x)]\\
 </ol>
 <p>以及如何调试：讨论下来一共就两种情况（回文中心在哪），可以尝试手造两种情况的小数据，看看是哪部分错的。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Buttiyeeppp/Code/blob/master/HLOJ/C23151.cpp">Code</a></p>
-<h2 id="CF547E"><a href="#CF547E" class="headerlink" title="CF547E"></a>CF547E</h2><p>将询问差分，只需要解决形如询问 $s<em>k$ 在 $s</em>{1\dots r}$ 中出现了多少次。</p>
+<h2 id="CF547E"><a href="#CF547E" class="headerlink" title="CF547E"></a>CF547E</h2><p>将询问差分，只需要解决形如询问 $s_k$ 在 $s_{1\dots r}$ 中出现了多少次。</p>
 <p>先将 $s_{1\dots n}$ 建立 AC 自动机，构造 fail 指针。</p>
-<p>再依次插入 $s<em>i$，将 $s_i$ 的每个前缀权值 $+1$，并处理  $s</em>{1\dots i}$ 的询问。每次询问的都是 fail 树的子树。树状数组维护即可。</p>
+<p>再依次插入 $s_i$，将 $s_i$ 的每个前缀权值 $+1$，并处理  $s_{1\dots i}$ 的询问。每次询问的都是 fail 树的子树。树状数组维护即可。</p>
 
       
     </div>

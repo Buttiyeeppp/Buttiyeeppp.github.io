@@ -356,28 +356,28 @@
 <li>四边形不等式：即对于任意 $l \le l’ \le r’ \le r $ 都满足 $w(l,r)+w(l,r’) \ge w(l,r’)+w(l’,r)$。</li>
 <li>区间包含单调性：即对于任意 $l \le l’ \le r’ \le r $ 都满足 $w(l,r) \ge w(l’,r’)$ 。</li>
 </ul>
-<h3 id="区间类2D1D型动态规划"><a href="#区间类2D1D型动态规划" class="headerlink" title="区间类2D1D型动态规划"></a>区间类2D1D型动态规划</h3><p>形如 $dp<em>{l,r}=\min\limits_k(dp</em>{l,k}+dp_{k+1,r})+w(l,r)$ 。</p>
+<h3 id="区间类2D1D型动态规划"><a href="#区间类2D1D型动态规划" class="headerlink" title="区间类2D1D型动态规划"></a>区间类2D1D型动态规划</h3><p>形如 $dp_{l,r}=\min\limits_k(dp_{l,k}+dp_{k+1,r})+w(l,r)$ 。</p>
 <p> 直接转移时间复杂度为 $O(n^3)$ 。</p>
 <p>Lemma: $w(l,r)$ 同时满足四边形不等式和区间包含单调性，则可以证明状态 $f_{l,r}$ 满足四边形不等式。</p>
-<p>Theorem:若状态 $f$ 满足四边形不等式，则对于状态 $f<em>{l,r}$ 的最优决策点 $m</em>{l,r}$ 有 $m<em>{l,r-1} \le m</em>{l,r} \le m_{l+1,r}$ 。</p>
+<p>Theorem:若状态 $f$ 满足四边形不等式，则对于状态 $f_{l,r}$ 的最优决策点 $m_{l,r}$ 有 $m_{l,r-1} \le m_{l,r} \le m_{l+1,r}$ 。</p>
 <p><a target="_blank" rel="noopener" href="https://oi-wiki.org/dp/opt/quadrangle/#%E5%8C%BA%E9%97%B4%E7%B1%BB2d1d%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8">证明</a>。</p>
 <p>枚举的决策点总数为 ：</p>
 <script type="math/tex; mode=display">
 \sum \limits_{1\le l\le r\le n}m_{l+1,r}-m_{l,r-1}=\sum\limits_{i=1}^nm_{i,n}-m_{1,n-i+1} \le n^2</script><p>时间复杂度 $O(n^2)$ 。</p>
-<h3 id="分治优化"><a href="#分治优化" class="headerlink" title="分治优化"></a>分治优化</h3><p>形如 $f<em>i=\min\limits</em>{j&lt;i}(g_j+w(j,i))$ 。</p>
+<h3 id="分治优化"><a href="#分治优化" class="headerlink" title="分治优化"></a>分治优化</h3><p>形如 $f_i=\min\limits_{j&lt;i}(g_j+w(j,i))$ 。</p>
 <p>即当前的转移不依赖于同层的dp值，因此我们可以任意决定同层内的dp计算顺序，常见于分层转移的二维dp。</p>
-<p>当 $w(l,r)$ 满足四边形不等式，则决策点依然满足单调性 $m<em>i\le m</em>{i+1}$<br>考虑分治，每次选取mid算出其决策点，则两边的决策点上界/下界得到更新。</p>
+<p>当 $w(l,r)$ 满足四边形不等式，则决策点依然满足单调性 $m_i\le m_{i+1}$<br>考虑分治，每次选取mid算出其决策点，则两边的决策点上界/下界得到更新。</p>
 <p>对于分治在同一层的多个子问题（即长度规模相同的），总的枚举量为 $O(n)$ 。</p>
 <p>共 $O(\log n)$ 层，时间复杂度 $O(n\log n)$ 。</p>
 <p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/868/F">Yet Another Minimization Problem</a></p>
-<h3 id="1D1D动态规划"><a href="#1D1D动态规划" class="headerlink" title="1D1D动态规划"></a>1D1D动态规划</h3><p>形如 $f<em>i=\min\limits</em>{j&lt;i}(f_j+w(j,i))$ 。</p>
+<h3 id="1D1D动态规划"><a href="#1D1D动态规划" class="headerlink" title="1D1D动态规划"></a>1D1D动态规划</h3><p>形如 $f_i=\min\limits_{j&lt;i}(f_j+w(j,i))$ 。</p>
 <p>当$w(i,j)$ 满足四边形不等式时，决策点单调。</p>
 <p>证明：</p>
 <p>设 $f_i$ 的最优决策点为 $m_i$ ，设 $i’&lt;i$。<br>根据四边形不等式可知 $w（i’,i+1)+w(m_i+i) \ge w(i’+i)+w(m_i,i+1)$。</p>
-<p>由于 $m<em>i$ 是最优决策点，则有 $f</em>{m<em>i}+w(m_i,i) \le f</em>{i’}+w(i’,i)$ 。</p>
-<p>根据上述两式，可得，$f<em>{m_i}+w(m_i,i+1) \le f</em>{i’}+w(i’,i+1)$<br>即 $m_{i+1} \ge m_i$。</p>
+<p>由于 $m_i$ 是最优决策点，则有 $f_{m_i}+w(m_i,i) \le f_{i’}+w(i’,i)$ 。</p>
+<p>根据上述两式，可得，$f_{m_i}+w(m_i,i+1) \le f_{i’}+w(i’,i+1)$<br>即 $m_{i+1} \ge m_i$。</p>
 <p>双指针即可，时间复杂度 $O(n)$ 。</p>
-<h2 id="斜率优化"><a href="#斜率优化" class="headerlink" title="斜率优化"></a>斜率优化</h2><p>形如 $f<em>i=\min\limits</em>{j}({a_i\times b_j+c_i+d_j})$。<br>其中 $a_i \times b_j$ 同时与 $i,j$ 有关。</p>
+<h2 id="斜率优化"><a href="#斜率优化" class="headerlink" title="斜率优化"></a>斜率优化</h2><p>形如 $f_i=\min\limits_{j}({a_i\times b_j+c_i+d_j})$。<br>其中 $a_i \times b_j$ 同时与 $i,j$ 有关。</p>
 <p>当 $j$ 是最优决策点时，通过移项可以得到 $-d_j=a_i\times b_j -f_i +c_i$<br>我们可以把上述式子看做 $y=kx+b$ 的形式。</p>
 <p>则，点 $(x,y)$ 等价于 $(b_j,-d_j)$ ，而关于 $i$ 的量转化为斜率 $a_i$ （以及一些无关紧要的常量 $c_i$ ）。</p>
 <p>则每个决策点都可以看做坐标系上一点，对于每个 $i$ 我们用一个固定斜率的直线去穿过这些点，找到一个点使得截距最大或最小。</p>
@@ -389,7 +389,7 @@
 <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3195">[HNOI2008] 玩具装箱</a><br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2900">[USACO08MAR] Land Acquisition G</a><br> <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5785">[SDOI2012] 任务安排</a>（当斜率不具有单调性，可以二分。）<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/622041814">套路化解决斜率优化问题</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Xing-Ling/p/11210179.html">斜率优化详解</a></p>
 <h2 id="矩阵快速幂"><a href="#矩阵快速幂" class="headerlink" title="矩阵快速幂"></a>矩阵快速幂</h2><p>矩阵快速幂的运用需要证明矩阵乘法具有结合律，并且它通常不具有交换律。<br>一个 $1\times n$ 的矩阵与 $n\times n$ 的矩阵相运算时间复杂度是 $n^2$ 的。<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3328">音质检测</a><br>运用这样的思想，可以运用树剖把序列问题转化为树上问题，这就是ddp。ddp多可以用于维护修改，我们在一条重链/轻链上做矩阵乘法，手动维护链顶的父亲的dp值。<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4719">模板</a><br>运用黑科技全局平衡二叉树，可以将模板题去掉一个 $\log$ 。<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4751">模板加强版</a><br>当一些可以使用ddp的题目上的修改只对单次询问有效时，可以不使用ddp，而是用倍增维护。<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/5024">保卫王国</a></p>
 <h2 id="数据结构优化"><a href="#数据结构优化" class="headerlink" title="数据结构优化"></a>数据结构优化</h2><p>譬如<a target="_blank" rel="noopener" href="https://xxzx.moe/2023/04/27/pkuwc2018minimax/">[PKUWC2018]Minimax</a><br>使用线段树合并加速。</p>
-<h2 id="wqs二分"><a href="#wqs二分" class="headerlink" title="wqs二分"></a>wqs二分</h2><p>解决的是当dp形如 $dp<em>{i,j}=\max\limits_k{dp</em>{k,j-1}+w(k,i)}$ 即，有取 $m$ 个数的限制的问题。它需要满足选 $i$ 个物品的最大值 $g(i)$ 是一个凸包，权值和斜率随着选的物品数量单调变化。<br>对于 $g(i)$ 这个凸包，我们相当于要求出 $g(m)$ ，即，找到 $(m,g(m))$ 这个点。</p>
+<h2 id="wqs二分"><a href="#wqs二分" class="headerlink" title="wqs二分"></a>wqs二分</h2><p>解决的是当dp形如 $dp_{i,j}=\max\limits_k{dp_{k,j-1}+w(k,i)}$ 即，有取 $m$ 个数的限制的问题。它需要满足选 $i$ 个物品的最大值 $g(i)$ 是一个凸包，权值和斜率随着选的物品数量单调变化。<br>对于 $g(i)$ 这个凸包，我们相当于要求出 $g(m)$ ，即，找到 $(m,g(m))$ 这个点。</p>
 <p>下文假设都是上凸包，下凸包反一反即可。</p>
 <p>根据上凸包的性质，随着点的横坐标增大，切这个点的直线的斜率也递减。反过来想，对于给定的斜率，如何知道它是凸包上哪一点的切线呢？<br><img src="https://xxzx.moe/wp-content/uploads/2023/08/dp优化整理1.png" alt=""><br>我们会发现，当这条直线穿过它相切的点 $(x,g(x))$ 的时候，截距 $b$ 最大。$g(x)=kx+b$ 。移项一下， $b=kx-g(x)$ 。我们要求的就是最大的 $b$ ，而取到这个最大的 $b$ 的 $x$ 就是我们要找的点了。<br><img src="https://xxzx.moe/wp-content/uploads/2023/08/dp优化整理2.png" alt=""><br>设 $f(x)=kx-g(x)$ 。我们发现， $g(x)$ 其实就是选 $x$ 个数的权值，我们不妨把选中每个数的权值都加上 $k$ ，这样 $f(x)$ 就转化为无选择物品数限制的新问题了，我们通常可以用更低复杂度的做法进行求解。</p>
 <p>我们可以不断二分斜率进行调整，找到点 $m$ 及其对应的  $f(m)$，从而求出 $g(m)$ 。</p>
